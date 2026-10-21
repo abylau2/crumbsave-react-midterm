@@ -14,7 +14,7 @@ React schedules state updates. Inside one event handler, reading `values` again 
 
 ## API to UI data flow
 
-The single business data source is `src/api/bagsApi.js`. It seeds 120 records from `seedBags.js` only when its localStorage key is absent. `useBags` calls `getBags` and stores a request status: loading, error, or success. `HomePage` derives the visible array with `filterAndSortBags` and then `paginate`. It does not keep a second mutable list. Search, filters, sorting, and pagination operate on the same records that power details and reservations. Creating a bag writes through `createBag`; returning to the home route reads the new data from the API.
+The single business data source is `src/api/bagsApi.js`. It seeds 120 records from 52 concepts in `fanConcepts.js` through `seedBags.js` when its localStorage key is absent. The API migrates the old generic seed catalog once while keeping created bags and reservation snapshots. `useBags` calls `getBags` and stores a request status: loading, error, or success. `HomePage` derives the visible array with `filterAndSortBags` and then `paginate`. It does not keep a second mutable list. Search, filters, sorting, and pagination operate on the same records that power details and reservations. Creating a bag writes through `createBag`; returning to the home route reads the new data from the API.
 
 ## Rendering and identity
 
@@ -41,7 +41,7 @@ Sold-out items disable the reservation button. Invalid bag IDs and unknown route
 
 - **Add another filter:** add its state field to `defaultFilters` in `CatalogControls.jsx`, add a labeled control there, then add a predicate in `filterAndSortBags` in `utils/catalog.js`. The existing `change` function resets pagination.
 - **Add a controlled input:** add a key to `emptyForm` in `utils/validation.js`, render a labeled field in `AddBagPage.jsx`, and validate/normalize it there. Then extend the API schema if it belongs to a listing.
-- **Display another API field:** add it in `seedBags.js` and in the `createBag` normalized data if users can edit it; then render it from the `bag` prop in `BagCard.jsx` or `BagDetailsPage.jsx`.
+- **Display another API field:** add it in `seedBags.js` (the `reference` field is a current example) and in the `createBag` normalized data if users can edit it; then render it from the `bag` prop in `BagCard.jsx` or `BagDetailsPage.jsx`.
 - **Add a reset action:** use `setFilters(defaultFilters)` for catalog controls or `setValues(emptyForm)` for the form, as the current buttons do.
 - **Modify sorting:** add an option in `CatalogControls.jsx` and a comparator branch in `filterAndSortBags`. End with `id` as a stable tie-breaker.
 - **Change an effect dependency:** if a request must reload when a new value changes, include that value in the dependency array and verify cleanup aborts the old request.

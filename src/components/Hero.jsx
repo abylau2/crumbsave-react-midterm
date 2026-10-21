@@ -11,9 +11,9 @@ export function Hero() {
       <div className="hero-actions"><Link className="button button-primary button-large" to="/#catalog">Explore surprise bags <ArrowUpRight size={18} /></Link><Link className="text-link" to="/#how-it-works">How it works <ArrowDownRight size={18} /></Link></div>
     </div>
     <div className="hero-visual">
-      <img src={imageSrc(`${import.meta.env.BASE_URL}images/croissants.jpg`)} width="1000" height="750" alt="Fresh pastries photographed in a cafe" fetchPriority="high" />
+      <img src={imageSrc(`${import.meta.env.BASE_URL}images/fan-food/ichiraku-ramen.webp`)} width="1000" height="750" alt="Steaming ramen with pork, egg, and noodles" fetchPriority="high" />
       <div className="hero-photo-caption"><span>GOOD THINGS, SAVED DAILY</span><span>01 / ALMATY</span></div>
-      <div className="hero-offer"><span className="eyebrow">SURPRISE BAG</span><strong>Evening Bakery Bag</strong><span>From ₸1,290 <ArrowUpRight size={15} /></span></div>
+      <Link className="hero-offer" to="/bags/fan-001"><span className="eyebrow">SURPRISE BAG</span><strong>Ichiraku Ramen</strong><span>From ₸2,490 <ArrowUpRight size={15} /></span></Link>
     </div>
   </section>;
 }

@@ -29,22 +29,32 @@ const goodValues = {
 test('120 varied, valid seed records have unique IDs and local images', () => {
   assert.equal(seedBags.length, 120);
   assert.equal(new Set(seedBags.map((bag) => bag.id)).size, 120);
-  assert.equal(new Set(seedBags.map((bag) => bag.businessName)).size, 30);
+  assert.equal(new Set(seedBags.map((bag) => bag.title)).size, 120);
+  assert.equal(new Set(seedBags.map((bag) => bag.image)).size, 52);
   assert.deepEqual(new Set(seedBags.map((bag) => bag.category)), new Set(CATEGORIES));
+  for (const category of CATEGORIES) assert.equal(seedBags.filter((bag) => bag.category === category).length, 20);
   assert.ok(seedBags.some((bag) => bag.quantity === 0));
   assert.ok(seedBags.some((bag) => bag.price > 4000));
+  assert.deepEqual(seedBags.slice(0, 12).map((bag) => bag.title), [
+    'Ichiraku Ramen', 'Krabby Patty', "Howl's Moving Breakfast", "Luffy's Meat on the Bone",
+    "Homer's Pink Donut", "Jake's Perfect Sandwich", "Remy's Ratatouille", "Sasha's Half Potato",
+    "Ponyo's Ham Ramen", 'The Cake Is a Lie', "Garfield's Lasagna", 'Skyrim Sweetroll'
+  ]);
+  const potato = seedBags.find((bag) => bag.title === "Sasha's Half Potato");
+  assert.deepEqual([potato.originalPrice, potato.price, discountPercent(potato), potato.description], [1980, 990, 50, 'Half a potato. A full commitment.']);
   const root = dirname(dirname(fileURLToPath(import.meta.url)));
   for (const bag of seedBags) {
     assert.ok(bag.price > 0 && bag.price < bag.originalPrice);
     assert.ok(bag.description.length > 25);
+    assert.ok(bag.reference?.length > 2);
     assert.ok(existsSync(join(root, 'public', bag.image)), bag.image);
   }
 });
 
 test('combined search and filters use all constraints', () => {
-  const result = filterAndSortBags(seedBags, { ...filters, search: 'bakery', category: 'Bakery', district: 'Bostandyk', price: 'under', availableOnly: true });
+  const result = filterAndSortBags(seedBags, { ...filters, search: 'Simpsons', category: 'Bakery', district: 'Turksib', price: 'under', availableOnly: true });
   assert.ok(result.length > 0);
-  assert.ok(result.every((bag) => bag.category === 'Bakery' && bag.district === 'Bostandyk' && bag.price < 2000 && bag.quantity > 0));
+  assert.ok(result.every((bag) => bag.category === 'Bakery' && bag.district === 'Turksib' && bag.price < 2000 && bag.quantity > 0 && bag.reference === 'The Simpsons'));
   assert.equal(filterAndSortBags(seedBags, { ...filters, search: '  impossible bag  ' }).length, 0);
 });
 
@@ -81,6 +91,18 @@ test('API seeds once and respects a stored empty array', async () => {
   assert.deepEqual(await getBags(), []);
 });
 
+test('catalog migration replaces generic seed and keeps created bags and old reservations', async () => {
+  const created = { ...seedBags[0], id: 'bag-user-created', title: 'My own bag' };
+  const oldReservation = { id: 'reservation-old', bagId: 'seed-001', title: 'Old bag', price: 1000, image: '/images/croissants.jpg' };
+  localStorage.setItem(demoStorageKey, JSON.stringify({ bags: [{ ...created, id: 'seed-001' }, created], reservations: [oldReservation] }));
+  const migrated = await getBags();
+  assert.equal(migrated.length, 121);
+  assert.equal(migrated.filter((bag) => bag.id === created.id).length, 1);
+  assert.equal(migrated.some((bag) => bag.id === 'seed-001'), false);
+  assert.equal((await getReservations())[0].archived, true);
+  assert.equal(JSON.parse(localStorage.getItem(demoStorageKey)).catalogVersion, 2);
+});
+
 test('API creates a bag, persists it and rejects malformed data', async () => {
   await assert.rejects(createBag({ ...normalizeBag(goodValues), price: 5000 }), { code: 'VALIDATION_ERROR' });
   const bag = await createBag(normalizeBag(goodValues));
@@ -90,14 +112,14 @@ test('API creates a bag, persists it and rejects malformed data', async () => {
 });
 
 test('reservation decrements inventory once and persists a snapshot', async () => {
-  const before = await getBagById('seed-001');
-  const result = await reserveBag('seed-001');
+  const before = await getBagById('fan-001');
+  const result = await reserveBag('fan-001');
   assert.equal(result.bag.quantity, before.quantity - 1);
   assert.equal((await getReservations()).length, 1);
-  assert.equal((await getBagById('seed-001')).quantity, before.quantity - 1);
-  await assert.rejects(reserveBag('seed-001'), { code: 'DUPLICATE' });
-  await assert.rejects(reserveBag('seed-011'), { code: 'SOLD_OUT' });
-  assert.equal((await getBagById('seed-001')).quantity, before.quantity - 1);
+  assert.equal((await getBagById('fan-001')).quantity, before.quantity - 1);
+  await assert.rejects(reserveBag('fan-001'), { code: 'DUPLICATE' });
+  await assert.rejects(reserveBag('fan-023'), { code: 'SOLD_OUT' });
+  assert.equal((await getBagById('fan-001')).quantity, before.quantity - 1);
 });
 
 test('transient failures recover and aborted requests do not complete', async () => {

@@ -15,7 +15,7 @@ export function pickupWindow(bag) {
 export function filterAndSortBags(bags, filters) {
   const query = filters.search.trim().toLocaleLowerCase();
   const filtered = bags.filter((bag) => {
-    const searchable = [bag.title, bag.businessName, bag.description, bag.district].join(' ').toLocaleLowerCase();
+    const searchable = [bag.title, bag.businessName, bag.description, bag.district, bag.reference].join(' ').toLocaleLowerCase();
     if (query && !searchable.includes(query)) return false;
     if (filters.category !== 'All' && bag.category !== filters.category) return false;
     if (filters.district !== 'All districts' && bag.district !== filters.district) return false;

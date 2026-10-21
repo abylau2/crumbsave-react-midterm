@@ -7,8 +7,8 @@
 
 ## Features
 
-- 120 usable seeded listings: 20 per category across Bakery, Meals, Produce, Desserts, Groceries, and Drinks.
-- Search by title, business, description, and district; category, district, price, and availability filters; deterministic sorting; 12 results per page.
+- 120 fan-inspired seeded listings from 52 iconic food ideas: 20 per category across Bakery, Meals, Produce, Desserts, Groceries, and Drinks. These are unofficial references with fictional sellers.
+- Search by title, business, description, district, or pop-culture source; category, district, price, and availability filters; deterministic sorting; 12 results per page.
 - Individual `/bags/:id` details with a working reservation action, quantity decrement, and duplicate prevention.
 - Controlled add-bag form with inline validation and an API-backed success state.
 - Persistent reservations and listings in browser `localStorage`.
@@ -52,13 +52,14 @@ npm run preview
 ```text
 src/
   api/bagsApi.js          asynchronous data and persistence boundary
+  data/fanConcepts.js     52 named food concepts and hand-written variants
   data/seedBags.js        deterministic 120-record demo catalog
   components/             reusable navigation, catalog, cards and states
   hooks/useBags.js        loading/error/success catalog hook with cleanup
   pages/                  route-level experiences
   utils/                  catalog and validation functions
   styles/                 tokens, global rules, layout, components, responsive
-public/images/            16 locally stored food photographs
+public/images/fan-food/   52 locally stored food photographs
 public/fonts/             locally stored DM Sans and Newsreader fonts and OFL licenses
 tests/                    focused unit and browser smoke tests
 ```
@@ -67,7 +68,7 @@ tests/                    focused unit and browser smoke tests
 
 All business data access goes through `src/api/bagsApi.js`: `getBags`, `getBagById`, `createBag`, `reserveBag`, and `getReservations`. Calls take about 450 ms and accept an optional `AbortSignal`. Returned values are copies so components cannot accidentally mutate storage. `reserveBag` reads the current state at commit time and writes the reduced quantity and reservation together. `createBag` validates fields again at the API boundary and uses a UUID for the new listing.
 
-The first API read seeds `localStorage` with 120 meaningful records. A stored empty array remains empty; the API only seeds when the storage key is absent. Created bags, reduced quantities, and reservations survive refresh in the same browser. Browser storage can be cleared by the user, so this is a demo rather than a shared account system. To reset intentionally during development, run `localStorage.removeItem('crumbsave:demo:v1'); location.reload()` in DevTools. The API also exports `resetDemoData()` for tests.
+The first API read seeds `localStorage` with 120 meaningful records. The existing storage key is versioned internally. On migration from the original generic catalog, old `seed-` listings are replaced with new `fan-` listings while user-created `bag-` records and reservation snapshots remain. Reservations for retired seed listings are marked as archived, with their original details still visible. A stored empty array remains empty. Created bags, reduced quantities, and reservations survive refresh in the same browser. Browser storage can be cleared by the user, so this is a demo rather than a shared account system. To reset intentionally during development, run `localStorage.removeItem('crumbsave:demo:v1'); location.reload()` in DevTools. The API also exports `resetDemoData()` for tests.
 
 To exercise the transient catalog error and retry state, open DevTools on the local app, run `sessionStorage.setItem('crumbsave:fail-next', 'getBags'); location.reload()`, then click **Try again**. This causes one request to reject and does not erase saved data.
 
@@ -77,13 +78,13 @@ To exercise the transient catalog error and retry state, open DevTools on the lo
 
 ## Deployment
 
-`vercel.json` supplies the SPA rewrite for Vercel. `public/_redirects` supplies the same fallback for Netlify. Both work with the root Vite build. Connect this repository to either host, use `npm run build`, set the publish directory to `dist`, and verify a direct refresh on `/bags/seed-001` and `/reservations`. No environment variables or backend service are required.
+`vercel.json` supplies the SPA rewrite for Vercel. `public/_redirects` supplies the same fallback for Netlify. Both work with the root Vite build. Connect this repository to either host, use `npm run build`, set the publish directory to `dist`, and verify a direct refresh on `/bags/fan-001` and `/reservations`. No environment variables or backend service are required.
 
 The public demo is deployed to GitHub Pages from the `gh-pages` branch. Run `npm run build:pages` to create `dist-pages` with the correct repository base path. `scripts/write-pages-fallback.mjs` writes a `404.html` redirect: GitHub Pages first responds with its missing-page status for a nested URL, then redirects to the root document, where `main.jsx` restores the route before React mounts. The final page works after refresh; Vercel or Netlify is still preferable because their rewrite rules serve nested routes directly without this intermediate redirect.
 
 ## Images and fonts
 
-The 16 local food photos in `public/images` are downloaded from Unsplash and used under the [Unsplash License](https://unsplash.com/license), which permits free use without required attribution. Fourteen photos show food at cafes or restaurants; two show real produce markets. Source pages and URLs are recorded in [IMAGE_CREDITS.md](IMAGE_CREDITS.md). DM Sans and Newsreader are served locally with their OFL licenses in `public/fonts/`. Photos illustrate categories and do not depict offers from the named example businesses. Image URLs include a small version suffix so returning visitors receive updated photos.
+The 52 concept photos in `public/images/fan-food` are local copies: 50 free Unsplash photos under the [Unsplash License](https://unsplash.com/license), one CC0 dorayaki photograph, and one public-domain potato photograph from Wikimedia Commons. All source pages are recorded in [IMAGE_CREDITS.md](IMAGE_CREDITS.md). The older 16 local photos are retained so archived reservations can still show their snapshots. DM Sans and Newsreader are served locally with their OFL licenses in `public/fonts/`. Food photos illustrate fan-inspired ideas; they do not depict actual offers from the fictional sellers or partnerships with the referenced franchises. Image URLs include a version suffix so returning visitors receive updated photos.
 
 ## Limits
 

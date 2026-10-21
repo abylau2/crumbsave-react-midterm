@@ -19,7 +19,12 @@ with sync_playwright() as playwright:
     expect(page.locator('.bag-card')).to_have_count(12)
     expect(page.locator('.result-count')).to_contain_text('120 bags found')
     first_page_ids = page.locator('.bag-card h3').all_text_contents()
-    assert len(set(first_page_ids)) >= 4
+    assert first_page_ids == [
+        'Ichiraku Ramen', 'Krabby Patty', "Howl's Moving Breakfast", "Luffy's Meat on the Bone",
+        "Homer's Pink Donut", "Jake's Perfect Sandwich", "Remy's Ratatouille", "Sasha's Half Potato",
+        "Ponyo's Ham Ramen", 'The Cake Is a Lie', "Garfield's Lasagna", 'Skyrim Sweetroll',
+    ]
+    assert len(set(page.locator('.bag-card img').evaluate_all('(images) => images.map((image) => image.getAttribute("src"))'))) == 12
     print('PASS initial 120 records, 12 cards')
     page.get_by_role('link', name='Explore surprise bags').first.click()
     page.wait_for_timeout(250)
@@ -32,7 +37,7 @@ with sync_playwright() as playwright:
     page.get_by_role('button', name='Bakery', exact=True).click()
     expect(page.locator('.result-count')).to_contain_text('20 bags found')
     assert page.locator('.bag-card .category-label').all_text_contents() == ['Bakery'] * 12
-    page.get_by_role('searchbox').fill('Warm Corner')
+    page.get_by_role('searchbox').fill('Homer')
     expect(page.locator('.result-count')).to_contain_text('bags found')
     assert page.locator('.bag-card').count() > 0
     page.get_by_role('searchbox').fill('zzzz-no-food')
@@ -48,8 +53,9 @@ with sync_playwright() as playwright:
     print('PASS pagination changes records')
 
     page.locator('.bag-card').first.get_by_role('link', name=re.compile('View bag', re.I)).last.click()
-    expect(page).to_have_url(re.compile('/bags/seed-001$'))
-    expect(page.get_by_role('heading', level=1)).to_contain_text('Evening Bakery Bag')
+    expect(page).to_have_url(re.compile('/bags/fan-001$'))
+    expect(page.get_by_role('heading', level=1)).to_contain_text('Ichiraku Ramen')
+    expect(page.get_by_text('Inspired by Naruto')).to_be_visible()
     page.get_by_role('button', name=re.compile('Reserve this bag')).click()
     expect(page.get_by_text('A good find is yours.')).to_be_visible()
     page.reload(wait_until='networkidle')

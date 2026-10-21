@@ -82,6 +82,7 @@
 .detail-info{padding:13px 0 0}
 .detail-info h1{font-size:clamp(39px,4.1vw,58px);color:var(--forest);margin:16px 0 9px}
 .detail-business{font-size:16px;color:var(--muted);margin-bottom:27px}
+.detail-reference{display:inline-block;font-size:12px;line-height:1.4;color:var(--forest);background:var(--sage);border-radius:6px;padding:7px 10px;margin:-10px 0 19px}
 .detail-description{font-size:16px;line-height:1.72;color:var(--charcoal);margin-bottom:28px}
 .detail-facts{border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:27px}
 .detail-facts>div{display:flex;align-items:center;gap:16px;padding:15px 0}
@@ -129,5 +130,6 @@
 .reservation-card>img{width:160px;height:130px;object-fit:cover;border-radius:11px}.reservation-card h2{font-size:21px;margin:7px 0 4px}.reservation-card p{font-size:13px;color:var(--muted);margin-bottom:10px}
 .reservation-meta{display:flex;flex-wrap:wrap;gap:8px 17px;color:var(--muted);font-size:12px}
 .reservation-end{display:flex;flex-direction:column;align-items:flex-end;gap:8px}.reservation-end strong{font-size:23px;color:var(--forest)}.reservation-end a{font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:4px;color:var(--forest)}
+.reservation-archived{font-size:12px;color:var(--muted);text-align:right}
 .status-label{font-size:11px;font-weight:700;color:var(--forest);background:var(--pistachio);padding:6px 9px;border-radius:7px}
 .reservation-loading{max-width:450px;margin-top:55px}.reservation-loading .title{margin-top:0}

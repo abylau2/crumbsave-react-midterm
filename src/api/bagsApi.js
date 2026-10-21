@@ -2,6 +2,7 @@ import { categoryImage, seedBags } from '../data/seedBags.js';
 import { normalizeBag, validateBag } from '../utils/validation.js';
 
 const STORAGE_KEY = 'crumbsave:demo:v1';
+const CATALOG_VERSION = 2;
 const FAIL_NEXT_KEY = 'crumbsave:fail-next';
 const WAIT_MS = 450;
 
@@ -20,13 +21,25 @@ function readState() {
   try {
     raw = localStorage.getItem(STORAGE_KEY);
     if (raw === null) {
-      const initial = { bags: copy(seedBags), reservations: [] };
+      const initial = { catalogVersion: CATALOG_VERSION, bags: copy(seedBags), reservations: [] };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(initial));
       return initial;
     }
     const state = JSON.parse(raw);
     if (!Array.isArray(state.bags) || !Array.isArray(state.reservations)) {
       throw new ApiError('Saved data is invalid. Reset the local data and try again.', 'CORRUPT_DATA');
+    }
+    if ((state.catalogVersion ?? 1) < CATALOG_VERSION) {
+      // Retire the old generic seed IDs while preserving created bags and
+      // reservation snapshots. An intentionally empty saved catalog stays empty.
+      const hadRecords = state.bags.length > 0;
+      const customBags = state.bags.filter((bag) => !bag.id.startsWith('seed-'));
+      state.bags = hadRecords ? [...customBags, ...copy(seedBags)] : [];
+      state.reservations = state.reservations.map((reservation) =>
+        reservation.bagId?.startsWith('seed-') ? { ...reservation, archived: true } : reservation
+      );
+      state.catalogVersion = CATALOG_VERSION;
+      writeState(state);
     }
     return state;
   } catch (error) {
@@ -137,7 +150,7 @@ export function reserveBag(id, { signal } = {}) {
 
 // Development utility: call resetDemoData() from the console through a local test harness.
 export function resetDemoData() {
-  writeState({ bags: copy(seedBags), reservations: [] });
+  writeState({ catalogVersion: CATALOG_VERSION, bags: copy(seedBags), reservations: [] });
 }
 
 export const demoStorageKey = STORAGE_KEY;
