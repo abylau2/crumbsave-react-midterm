@@ -1,0 +1,53 @@
+# CrumbSave React defense guide
+
+This guide describes the code in this repository. It is intended for a live midterm defense, not as a claim about any deployment.
+
+## How the app is built
+
+`src/main.jsx` mounts one `App` inside `React.StrictMode` and `BrowserRouter`. `App.jsx` renders the shared `Header`, one page selected by `Routes`, and the shared `Footer`. The home page composes `Hero`, `HowItWorks`, `CatalogControls`, `BagCard`, `Pagination`, and reusable state components. Detail, add, reservations, and 404 pages are separate components. A component receives data through props: for example, `BagCard` receives one `bag` and renders it without owning the catalog.
+
+## State, events, and controlled forms
+
+`App.jsx` keeps the catalog filter object above `Routes`. This lets the filters survive navigation to a detail page and back. `HomePage` receives that object and the setter. Changing a filter uses a functional state update and resets `page` to 1. `Header` owns its mobile-menu `open` state. `AddBagPage` owns `values`, `errors`, and `submission`. Every input's `value` comes from `values`; `onChange` writes the new value to React state. The browser input is not the source of truth. Submit calls `validateBag`, then `createBag`. The API validates a second time and saves the result.
+
+React schedules state updates. Inside one event handler, reading `values` again immediately after `setValues` would still see the current render's snapshot. The form uses functional updates so editing one field does not erase the others. React may batch related state updates into one render.
+
+## API to UI data flow
+
+The single business data source is `src/api/bagsApi.js`. It seeds 120 records from `seedBags.js` only when its localStorage key is absent. `useBags` calls `getBags` and stores a request status: loading, error, or success. `HomePage` derives the visible array with `filterAndSortBags` and then `paginate`. It does not keep a second mutable list. Search, filters, sorting, and pagination operate on the same records that power details and reservations. Creating a bag writes through `createBag`; returning to the home route reads the new data from the API.
+
+## Rendering and identity
+
+A state or prop change asks React to render a new description of the UI. During reconciliation, React compares the new tree with the previous tree. The commit phase applies the necessary browser updates. `BagCard` is rendered with `key={bag.id}` and reservations with `key={item.id}`; these stable IDs identify items when order or filters change. Array positions would be unreliable because filtering and sorting reorder the list.
+
+`BagDetailsPage` changes when the `:id` route parameter changes. Its loading effect depends on `id` and `revision`, resets the page state, and fetches the requested bag. This prevents the previous bag's detail or success message from being shown as if it belonged to the new ID. The filters stay in `App`, while detail-local state intentionally resets for a different bag.
+
+## Effects, cleanup, and races
+
+`useBags` uses `useEffect` for asynchronous catalog loading. Its dependency is `revision`, which changes on Retry. The effect creates an `AbortController` and aborts on cleanup. A delayed result from an obsolete effect cannot overwrite a newer result. `BagDetailsPage` does the same for `id` and `revision`; it also aborts an unfinished reservation request if the detail page is left. `ReservationsPage` aborts its old fetch. These patterns also handle StrictMode's extra development setup/cleanup cycle. Ordinary filtering is synchronous derived work, so it is done with a pure function and `useMemo`, not an effect.
+
+A stale closure is a function that still sees values from an older render. When the next state depends on the current state, this project uses functional setters, such as `setRevision((value) => value + 1)`. The API reads storage at the point where it commits a reservation. Two near-simultaneous reservation requests cannot both decrement the same bag: the later operation sees the first reservation and rejects a duplicate.
+
+## Four key UI states
+
+- **Loading:** `LoadingSkeleton` or route-specific skeletons appear during the 450 ms simulated request.
+- **Error:** a failed request shows `ErrorState` with a working Retry button. The documented one-time failure flag makes this testable.
+- **Empty:** no catalog matches shows `EmptyState` and Clear Filters; no reservations shows a separate empty state.
+- **Success:** cards load, a created bag gets a dedicated success panel, and a successful reservation updates quantity and shows a confirmation link.
+
+Sold-out items disable the reservation button. Invalid bag IDs and unknown routes have their own states.
+
+## Live modifications an instructor may ask for
+
+- **Add another filter:** add its state field to `defaultFilters` in `CatalogControls.jsx`, add a labeled control there, then add a predicate in `filterAndSortBags` in `utils/catalog.js`. The existing `change` function resets pagination.
+- **Add a controlled input:** add a key to `emptyForm` in `utils/validation.js`, render a labeled field in `AddBagPage.jsx`, and validate/normalize it there. Then extend the API schema if it belongs to a listing.
+- **Display another API field:** add it in `seedBags.js` and in the `createBag` normalized data if users can edit it; then render it from the `bag` prop in `BagCard.jsx` or `BagDetailsPage.jsx`.
+- **Add a reset action:** use `setFilters(defaultFilters)` for catalog controls or `setValues(emptyForm)` for the form, as the current buttons do.
+- **Modify sorting:** add an option in `CatalogControls.jsx` and a comparator branch in `filterAndSortBags`. End with `id` as a stable tie-breaker.
+- **Change an effect dependency:** if a request must reload when a new value changes, include that value in the dependency array and verify cleanup aborts the old request.
+- **Add a loading or error condition:** extend the request status branch in the page, or trigger `sessionStorage.setItem('crumbsave:fail-next', 'getBags')` before reload to inspect the existing error path.
+- **Modify an event handler:** for example, edit `reserve` in `BagDetailsPage.jsx`; keep the pending guard, API call, success update, and error feedback together.
+
+## What is intentionally simulated
+
+Businesses and bag contents are fictional. A reservation is saved only in the current browser's localStorage; there is no shared inventory, user account, real payment, or physical pickup. This is the appropriate scope for the React midterm.
