@@ -1,5 +1,8 @@
 # CrumbSave
 
+**Public demo:** https://abylau2.github.io/crumbsave-react-midterm/  
+**Source repository:** https://github.com/abylau2/crumbsave-react-midterm
+
 **Good food, another chance.** CrumbSave is an independently built React midterm project: a fictional surplus-food Surprise Bag marketplace for Almaty. Visitors can browse demo offers, create a demo listing, and save a demo reservation. No real shops, payments, or pickup bookings are involved.
 
 ## Features
@@ -80,7 +83,7 @@ The public demo is deployed to GitHub Pages from the `gh-pages` branch. Run `npm
 
 ## Images and fonts
 
-The 16 local food photos in `public/images` are downloaded from Unsplash and used under the [Unsplash License](https://unsplash.com/license), which permits free use without required attribution. Source URLs, matching each file stem, are recorded in [IMAGE_CREDITS.md](IMAGE_CREDITS.md). The DM Sans and Newsreader font files are served locally from Google Fonts. Every listing image is an existing local file; listing visuals and businesses are simulated examples.
+The 16 local food photos in `public/images` are downloaded from Unsplash and used under the [Unsplash License](https://unsplash.com/license), which permits free use without required attribution. Source URLs, matching each file stem, are recorded in [IMAGE_CREDITS.md](IMAGE_CREDITS.md). The DM Sans and Newsreader font files are served locally from Google Fonts; their OFL license files are included in `public/fonts/`. Every listing image is an existing local file; listing visuals and businesses are simulated examples.
 
 ## Limits
 
