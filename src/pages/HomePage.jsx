@@ -19,9 +19,8 @@ export function HomePage({ filters, setFilters }) {
   const changePage = (page) => setFilters((current) => ({ ...current, page }));
   return <>
     <Hero />
-    <HowItWorks />
     <section className="catalog-section container" id="catalog" aria-labelledby="catalog-title">
-      <div className="section-header"><div><p className="eyebrow">THE DAILY FIND</p><h2 id="catalog-title">Explore what's <em>on the menu.</em></h2><p>Good food from local spots, collected in one place.</p></div></div>
+      <div className="section-header"><div><p className="eyebrow">THE DAILY FIND</p><h2 id="catalog-title">Explore what's on the menu.</h2><p>Good food from local spots, collected in one place.</p></div></div>
       {status === 'loading' && <LoadingSkeleton />}
       {status === 'error' && <ErrorState message={error} onRetry={retry} />}
       {status === 'success' && <>
@@ -29,6 +28,7 @@ export function HomePage({ filters, setFilters }) {
         {results.length === 0 ? <EmptyState onClear={clear} /> : <><div className="bag-grid">{pageData.items.map((bag, index) => <BagCard key={bag.id} bag={bag} priority={index < 3} />)}</div><Pagination page={pageData.currentPage} pageCount={pageData.pageCount} onPage={changePage} /></>}
       </>}
     </section>
+    <HowItWorks />
     <section className="closing-banner"><div className="container closing-inner"><div><p className="eyebrow">HAVE SOMETHING GOOD LEFT?</p><h2>Make room for <em>another chance.</em></h2><p>Create a surprise bag and see it in your catalog.</p></div><Link className="button button-light" to="/add">List a surprise bag <ArrowUpRight size={18} /></Link></div></section>
   </>;
 }
