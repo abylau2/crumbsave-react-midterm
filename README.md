@@ -76,7 +76,7 @@ To exercise the transient catalog error and retry state, open DevTools on the lo
 
 `vercel.json` supplies the SPA rewrite for Vercel. `public/_redirects` supplies the same fallback for Netlify. Both work with the root Vite build. Connect this repository to either host, use `npm run build`, set the publish directory to `dist`, and verify a direct refresh on `/bags/seed-001` and `/reservations`. No environment variables or backend service are required.
 
-For GitHub Pages, build with `npm run build -- --base=/REPOSITORY_NAME/` and use the matching React Router basename already derived from Vite's `BASE_URL`. GitHub Pages lacks native SPA rewrites; a `404.html` fallback can render nested routes but returns HTTP 404. Vercel or Netlify is preferable for clean nested-route responses.
+The public demo is deployed to GitHub Pages from the `gh-pages` branch. Run `npm run build:pages` to create `dist-pages` with the correct repository base path. `scripts/write-pages-fallback.mjs` writes a `404.html` redirect: GitHub Pages first responds with its missing-page status for a nested URL, then redirects to the root document, where `main.jsx` restores the route before React mounts. The final page works after refresh; Vercel or Netlify is still preferable because their rewrite rules serve nested routes directly without this intermediate redirect.
 
 ## Images and fonts
 
