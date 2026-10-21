@@ -83,7 +83,7 @@ The public demo is deployed to GitHub Pages from the `gh-pages` branch. Run `npm
 
 ## Images and fonts
 
-The 16 local food photos in `public/images` are downloaded from Unsplash and used under the [Unsplash License](https://unsplash.com/license), which permits free use without required attribution. Nine photos were selected from cafe and restaurant scenes; the rest illustrate produce, groceries, and drinks. Source pages and URLs are recorded in [IMAGE_CREDITS.md](IMAGE_CREDITS.md). DM Sans is served locally with its OFL license in `public/fonts/`. Photos illustrate categories and do not depict offers from the named example businesses. Image URLs include a small version suffix so returning visitors receive updated photos.
+The 16 local food photos in `public/images` are downloaded from Unsplash and used under the [Unsplash License](https://unsplash.com/license), which permits free use without required attribution. Fourteen photos show food at cafes or restaurants; two show real produce markets. Source pages and URLs are recorded in [IMAGE_CREDITS.md](IMAGE_CREDITS.md). DM Sans is served locally with its OFL license in `public/fonts/`. Photos illustrate categories and do not depict offers from the named example businesses. Image URLs include a small version suffix so returning visitors receive updated photos.
 
 ## Limits
 
