@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Clock3, MapPin } from 'lucide-react';
 import { discountPercent, formatKzt, pickupWindow } from '../utils/catalog.js';
+import { imageSrc } from '../utils/imageSrc.js';
 
 export function BagCard({ bag, priority = false }) {
   const soldOut = bag.quantity === 0;
   return <article className={`bag-card ${soldOut ? 'is-sold-out' : ''}`}>
     <Link className="bag-image-link" to={`/bags/${bag.id}`} aria-label={`View ${bag.title} from ${bag.businessName}`}>
-      <img src={bag.image} alt={`${bag.category} surprise bag from ${bag.businessName}`} width="1000" height="750" loading={priority ? 'eager' : 'lazy'} />
+      <img src={imageSrc(bag.image)} alt={`Food photograph illustrating ${bag.title}`} width="1000" height="750" loading={priority ? 'eager' : 'lazy'} />
       <span className="discount-tag">SAVE {discountPercent(bag)}%</span>
     </Link>
     <div className="bag-body">

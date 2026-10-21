@@ -26,12 +26,12 @@ function readState() {
     }
     const state = JSON.parse(raw);
     if (!Array.isArray(state.bags) || !Array.isArray(state.reservations)) {
-      throw new ApiError('Saved demo data is invalid. Reset the demo data and try again.', 'CORRUPT_DATA');
+      throw new ApiError('Saved data is invalid. Reset the local data and try again.', 'CORRUPT_DATA');
     }
     return state;
   } catch (error) {
     if (error instanceof ApiError) throw error;
-    throw new ApiError('Demo storage is unavailable. Check browser storage settings and try again.', 'STORAGE_ERROR');
+    throw new ApiError('Browser storage is unavailable. Check browser storage settings and try again.', 'STORAGE_ERROR');
   }
 }
 
@@ -39,7 +39,7 @@ function writeState(state) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch {
-    throw new ApiError('Could not save demo data. Free up browser storage and try again.', 'STORAGE_ERROR');
+    throw new ApiError('Could not save data. Free up browser storage and try again.', 'STORAGE_ERROR');
   }
 }
 
@@ -65,7 +65,7 @@ async function run(operation, signal, action) {
   try {
     if (sessionStorage.getItem(FAIL_NEXT_KEY) === operation) {
       sessionStorage.removeItem(FAIL_NEXT_KEY);
-      throw new ApiError('A temporary demo request failed. Please try again.', 'SIMULATED_FAILURE');
+      throw new ApiError('A temporary request failed. Please try again.', 'SIMULATED_FAILURE');
     }
   } catch (error) {
     if (error instanceof ApiError) throw error;
@@ -110,7 +110,7 @@ export function reserveBag(id, { signal } = {}) {
     const index = state.bags.findIndex((bag) => bag.id === id);
     if (index < 0) throw new ApiError('This bag could not be found.', 'NOT_FOUND');
     if (state.reservations.some((reservation) => reservation.bagId === id)) {
-      throw new ApiError('You already reserved this bag in the demo.', 'DUPLICATE');
+      throw new ApiError('You already reserved this bag.', 'DUPLICATE');
     }
     const bag = state.bags[index];
     if (bag.quantity <= 0) throw new ApiError('This bag is sold out.', 'SOLD_OUT');

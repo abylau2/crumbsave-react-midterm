@@ -59,7 +59,7 @@ src/
   utils/                  catalog and validation functions
   styles/                 tokens, global rules, layout, components, responsive
 public/images/            16 locally stored food photographs
-public/fonts/             locally stored DM Sans and Newsreader font files
+public/fonts/             locally stored DM Sans font and OFL license
 tests/                    focused unit and browser smoke tests
 ```
 
@@ -83,7 +83,7 @@ The public demo is deployed to GitHub Pages from the `gh-pages` branch. Run `npm
 
 ## Images and fonts
 
-The 16 local food photos in `public/images` are downloaded from Unsplash and used under the [Unsplash License](https://unsplash.com/license), which permits free use without required attribution. Source URLs, matching each file stem, are recorded in [IMAGE_CREDITS.md](IMAGE_CREDITS.md). The DM Sans and Newsreader font files are served locally from Google Fonts; their OFL license files are included in `public/fonts/`. Every listing image is an existing local file; listing visuals and businesses are simulated examples.
+The 16 local food photos in `public/images` are downloaded from Unsplash and used under the [Unsplash License](https://unsplash.com/license), which permits free use without required attribution. Nine photos were selected from cafe and restaurant scenes; the rest illustrate produce, groceries, and drinks. Source pages and URLs are recorded in [IMAGE_CREDITS.md](IMAGE_CREDITS.md). DM Sans is served locally with its OFL license in `public/fonts/`. Photos illustrate categories and do not depict offers from the named example businesses. Image URLs include a small version suffix so returning visitors receive updated photos.
 
 ## Limits
 

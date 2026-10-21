@@ -22,9 +22,9 @@
   .primary-nav{display:none;position:absolute;left:0;right:0;top:68px;background:var(--ivory);padding:17px 20px 22px;border-bottom:1px solid var(--border);box-shadow:0 10px 18px rgba(24,61,50,.08);flex-direction:column;align-items:stretch;gap:3px}
   .primary-nav.is-open{display:flex}.nav-link{padding:12px 8px;font-size:15px}.header-cta{margin-top:11px;justify-content:space-between}
   .hero{padding-top:49px;padding-bottom:54px;gap:37px}.hero h1{font-size:clamp(42px,10vw,60px);margin:0 0 22px}.hero-copy .eyebrow{margin-bottom:18px}.hero-lead{font-size:15px;line-height:1.65;margin-bottom:25px}
-  .hero-actions{gap:16px}.hero-disclaimer{margin-top:25px}.hero-visual{padding-left:0;padding-bottom:22px}.hero-visual>img{height:auto;aspect-ratio:4/3;border-radius:20px}.hero-offer{left:13px;bottom:55px;width:206px;padding:13px 15px}.hero-photo-caption{font-size:9px}
+  .hero-actions{gap:16px}.hero-visual{padding-left:0;padding-bottom:22px}.hero-visual>img{height:auto;aspect-ratio:4/3;border-radius:20px}.hero-offer{left:13px;bottom:55px;width:206px;padding:13px 15px}.hero-photo-caption{font-size:9px}
   .how-section{padding:55px 0}.how-intro h2{font-size:35px}.step{grid-template-columns:59px 1fr;padding:20px 0}.step-number{font-size:30px}
-  .catalog-section{padding-top:60px;padding-bottom:70px}.section-header{display:block;margin-bottom:27px}.section-header h2{font-size:37px}.demo-note{display:block;margin-top:14px;padding:0}
+  .catalog-section{padding-top:60px;padding-bottom:70px}.section-header{display:block;margin-bottom:27px}.section-header h2{font-size:37px}
   .controls-top{align-items:stretch;flex-direction:column;gap:10px}.search-box{width:100%}.result-count{align-self:flex-end}
   .category-tabs{gap:5px;padding-bottom:17px}.category-tab{padding:8px 12px;font-size:12px}
   .filter-label{width:100%;margin-bottom:3px}.filter-row{gap:8px}.select-wrap{flex:1;min-width:145px}.select-wrap select{width:100%}.sort-control{width:100%;justify-content:space-between}.sort-control select{flex:1;max-width:260px}.available-control{padding-left:3px}.clear-button{margin-left:auto}

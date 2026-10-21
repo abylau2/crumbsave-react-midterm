@@ -1,6 +1,6 @@
 const steps = [
   ['01', 'Discover', 'Explore available surprise bags from local food spots.'],
-  ['02', 'Reserve', 'Choose a bag and save your demo reservation.'],
+  ['02', 'Reserve', 'Choose a bag and save it to your reservations.'],
   ['03', 'Pick up', 'Visit the listed pickup area during the collection window.']
 ];
 export function HowItWorks() {
