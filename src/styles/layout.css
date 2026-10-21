@@ -11,7 +11,7 @@
 .hero{display:grid;grid-template-columns:53% 47%;align-items:center;min-height:648px;padding-top:48px;padding-bottom:65px}
 .hero-copy{padding-right:76px;padding-bottom:19px}
 .hero-copy .eyebrow{margin-bottom:25px}
-.hero h1{font-size:clamp(54px,5.5vw,76px);line-height:1.03;color:var(--forest);margin-bottom:28px;font-weight:600;letter-spacing:-.055em}
+.hero h1{font-size:clamp(54px,5.5vw,76px);line-height:.99;color:var(--forest);margin-bottom:28px;font-weight:600;letter-spacing:-.072em}
 .hero h1 em{white-space:nowrap}
 .hero-lead{font-size:17px;line-height:1.67;max-width:500px;color:var(--muted);margin-bottom:30px}
 .hero-actions{display:flex;align-items:center;gap:27px;flex-wrap:wrap}
@@ -28,7 +28,7 @@
 .how-intro>p:last-child{max-width:325px;color:var(--muted);font-size:15px;line-height:1.65}
 .steps{border-top:1px solid #c8d4c4}
 .step{display:grid;grid-template-columns:77px 1fr;gap:15px;padding:24px 0 21px;border-bottom:1px solid #c8d4c4}
-.step-number{font-family:var(--font-body);font-weight:500;font-size:35px;line-height:1;color:var(--forest)}
+.step-number{font-family:var(--font-editorial);font-style:italic;font-size:35px;line-height:1;color:var(--forest)}
 .step h3{font-size:18px;letter-spacing:-.02em;margin:0 0 5px}
 .step p{font-size:14px;color:var(--muted);margin:0;max-width:380px}
 .catalog-section{padding-top:88px;padding-bottom:105px;scroll-margin-top:24px}
@@ -53,4 +53,4 @@
 .page-state{min-height:55vh;padding-top:90px;padding-bottom:90px}
 .page-state h1{font-size:clamp(40px,5vw,64px);color:var(--forest);max-width:690px;margin:14px 0 20px}
 .page-state>p:not(.eyebrow){color:var(--muted);margin-bottom:28px}
-.not-found-number{display:block;font-family:var(--font-body);font-weight:500;font-size:100px;line-height:1;color:var(--pistachio)}
+.not-found-number{display:block;font-family:var(--font-editorial);font-style:italic;font-size:100px;line-height:1;color:var(--pistachio)}

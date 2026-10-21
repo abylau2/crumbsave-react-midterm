@@ -21,4 +21,4 @@ CrumbSave stores these Unsplash-hosted food photographs locally so the productio
 | fruit.jpg | https://unsplash.com/photos/market-stall-with-fresh-tropical-fruit-2zJhA9RSkys |
 | dinner.jpg | https://unsplash.com/photos/a-plate-of-pasta-on-a-table-in-a-restaurant-2F0xZ_1Fxys |
 
-The logo mark in the app is an original SVG drawn for this project. DM Sans is served from a local Google Fonts file under the SIL Open Font License.
+The logo mark in the app is an original SVG drawn for this project. DM Sans and Newsreader are served from local font files under the SIL Open Font License.
