@@ -25,7 +25,7 @@ The logo mark in the app is an original SVG drawn for this project. DM Sans and 
 
 ## Fan-food catalog images
 
-The 52 base images in `public/images/fan-food/` mostly use frames and game images associated with the work named in each concept's `reference` field in `src/data/fanConcepts.js`. Another 68 files ending in `-v1.webp` or `-v2.webp` are closer crops of those same sources for distinct listing variations. The Gordon Ramsay Beef Wellington image is from the official Hell's Kitchen menu. Chaliapin Steak Don uses a real-life recreation. These are unofficial academic-demo references. The original works and images belong to their respective rights holders; this project has not established a reuse license for the catalog images. In particular, the Unsplash and Wikimedia licenses previously listed for these file names no longer apply. Source-page records for every image are incomplete; do not present the collection as cleared for commercial use.
+The 52 base images in `public/images/fan-food/` mostly use frames and game images associated with the work named in each concept's `reference` field in `src/data/fanConcepts.js`. Another 68 files ending in `-v1.webp` or `-v2.webp` are closer crops of those same sources for distinct listing variations. The Gordon Ramsay Beef Wellington image is from the official Hell's Kitchen menu. Chaliapin Steak Don uses a real-life recreation, and Gojo's Kikufuku uses a photograph of the actual sweet. These are unofficial academic-demo references. The original works and images belong to their respective rights holders; this project has not established a reuse license for the catalog images. In particular, the Unsplash and Wikimedia licenses previously listed for these file names no longer apply. Source-page records for every image are incomplete; do not present the collection as cleared for commercial use.
 
 The following download locations were recorded for images added in the final pass. A third-party host may mirror a frame without owning the underlying rights.
 
@@ -56,3 +56,6 @@ These later replacements make the dish visible in the catalog card. The linked p
 | `chaliapin-steak-don.webp` | [Food Wars inspired real-life recreation](https://www.punchfork.com/recipe/Chaliapin-Steak-Don-No-Recipes) |
 | `ls-strawberry-shortcake.webp` | [Death Note manga art attributed to Takeshi Obata](https://www.zerochan.net/3034) |
 | `tree-trunks-apple-pie.webp`, `pinkie-pies-cupcakes.webp` | Closer crops of the existing animation frames |
+| `kikis-bread.webp` | [Kiki's Delivery Service bakery frame](https://note.com/animeteniwoha/n/n4ec1f12e2305) |
+| `butterbeer.webp` | [Harry Potter film frame showing the drink](https://www.moviepilot.de/news/wie-harry-potter-fans-butterbier-bestellen-konnen-160393) |
+| `gojos-kikufuku.webp` | [Sendai Airport product photograph of Kikufuku](https://www.sendai-airport.co.jp/recommend/omiyagerecommend.html) |
