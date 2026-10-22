@@ -14,7 +14,7 @@ React schedules state updates. Inside one event handler, reading `values` again 
 
 ## API to UI data flow
 
-The single business data source is `src/api/bagsApi.js`. It seeds 120 records from 52 concepts in `fanConcepts.js` through `seedBags.js` when its localStorage key is absent. The API migrates the old generic seed catalog once while keeping created bags and reservation snapshots. `useBags` calls `getBags` and stores a request status: loading, error, or success. `HomePage` derives the visible array with `filterAndSortBags` and then `paginate`. It does not keep a second mutable list. Search, filters, sorting, and pagination operate on the same records that power details and reservations. Creating a bag writes through `createBag`; returning to the home route reads the new data from the API.
+The single business data source is `src/api/bagsApi.js`. It seeds 120 records from 52 concepts in `fanConcepts.js` through `seedBags.js` when its localStorage key is absent. The API migrates the old generic seed catalog once while keeping created bags and reservation snapshots. Version 3 also updates seeded image paths for distinct variation crops without resetting inventory or reservations. `useBags` calls `getBags` and stores a request status: loading, error, or success. `HomePage` derives the visible array with `filterAndSortBags` and then `paginate`. Featured sorting keeps repeated food images apart; price and discount sorting remain strictly numeric. It does not keep a second mutable list. Search, filters, sorting, and pagination operate on the same records that power details and reservations. Creating a bag writes through `createBag`; returning to the home route reads the new data from the API.
 
 ## Rendering and identity
 

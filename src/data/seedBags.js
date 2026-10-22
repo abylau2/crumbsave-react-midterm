@@ -50,7 +50,7 @@ export const seedBags = [...firstListings, ...spreadRest].map((entry, index) => 
     quantity: index > 11 && index % 11 === 0 ? 0 : 1 + ((index * 5 + 2) % 7),
     pickupStart,
     pickupEnd,
-    image: `${assetBase}images/fan-food/${concept.slug}.webp`,
+    image: `${assetBase}images/fan-food/${concept.slug}${variation ? `-v${variation}` : ''}.webp`,
     featuredRank: index,
     createdAt: `2026-10-${String(1 + (index % 20)).padStart(2, '0')}T12:00:00.000Z`
   };

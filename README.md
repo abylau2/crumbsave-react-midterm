@@ -59,7 +59,7 @@ src/
   pages/                  route-level experiences
   utils/                  catalog and validation functions
   styles/                 tokens, global rules, layout, components, responsive
-public/images/fan-food/   52 locally stored reference images
+public/images/fan-food/   52 source images and 68 variation crops
 public/fonts/             locally stored DM Sans and Newsreader fonts and OFL licenses
 tests/                    focused unit and browser smoke tests
 ```
@@ -68,7 +68,7 @@ tests/                    focused unit and browser smoke tests
 
 All business data access goes through `src/api/bagsApi.js`: `getBags`, `getBagById`, `createBag`, `reserveBag`, and `getReservations`. Calls take about 450 ms and accept an optional `AbortSignal`. Returned values are copies so components cannot accidentally mutate storage. `reserveBag` reads the current state at commit time and writes the reduced quantity and reservation together. `createBag` validates fields again at the API boundary and uses a UUID for the new listing.
 
-The first API read seeds `localStorage` with 120 meaningful records. The existing storage key is versioned internally. On migration from the original generic catalog, old `seed-` listings are replaced with new `fan-` listings while user-created `bag-` records and reservation snapshots remain. Reservations for retired seed listings are marked as archived, with their original details still visible. A stored empty array remains empty. Created bags, reduced quantities, and reservations survive refresh in the same browser. Browser storage can be cleared by the user, so this is a demo rather than a shared account system. To reset intentionally during development, run `localStorage.removeItem('crumbsave:demo:v1'); location.reload()` in DevTools. The API also exports `resetDemoData()` for tests.
+The first API read seeds `localStorage` with 120 meaningful records. The existing storage key is versioned internally. On migration from the original generic catalog, old `seed-` listings are replaced with new `fan-` listings while user-created `bag-` records and reservation snapshots remain. A later migration updates seeded variation image paths while preserving saved quantities and reservations. Reservations for retired seed listings are marked as archived, with their original details still visible. A stored empty array remains empty. Created bags, reduced quantities, and reservations survive refresh in the same browser. Browser storage can be cleared by the user, so this is a demo rather than a shared account system. To reset intentionally during development, run `localStorage.removeItem('crumbsave:demo:v1'); location.reload()` in DevTools. The API also exports `resetDemoData()` for tests.
 
 To exercise the transient catalog error and retry state, open DevTools on the local app, run `sessionStorage.setItem('crumbsave:fail-next', 'getBags'); location.reload()`, then click **Try again**. This causes one request to reject and does not erase saved data.
 
@@ -84,7 +84,7 @@ The public demo is deployed to GitHub Pages from the `gh-pages` branch. Run `npm
 
 ## Images and fonts
 
-The 52 concept images in `public/images/fan-food` now depict scenes or food from the referenced films, series, and games. The Beef Wellington image comes from Gordon Ramsay's official Hell's Kitchen site. These images are third-party copyrighted material; their use is not licensed for commercial publication. Known image sources and the attribution limits are documented in [IMAGE_CREDITS.md](IMAGE_CREDITS.md). The older 16 Unsplash photos remain available for archived reservations and for newly created bags. DM Sans and Newsreader are served locally with their OFL licenses in `public/fonts/`. The images do not represent real marketplace offers or official franchise partnerships. Image URLs include a version suffix so returning visitors receive updated assets.
+The catalog has 52 concept images and 68 separate close-up crops for variations, so each seeded listing uses a distinct local file. These mostly depict scenes or food from the referenced films, series, manga, and games. The Beef Wellington image comes from Gordon Ramsay's official Hell's Kitchen site; Chaliapin Steak Don uses a real-life recreation because the available anime still did not show the dish clearly. These images are third-party copyrighted material; their use is not licensed for commercial publication. Known image sources and the attribution limits are documented in [IMAGE_CREDITS.md](IMAGE_CREDITS.md). The older 16 Unsplash photos remain available for archived reservations and for newly created bags. DM Sans and Newsreader are served locally with their OFL licenses in `public/fonts/`. The images do not represent real marketplace offers or official franchise partnerships. Image URLs include a version suffix so returning visitors receive updated assets.
 
 ## Limits
 

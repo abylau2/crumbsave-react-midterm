@@ -25,20 +25,34 @@ The logo mark in the app is an original SVG drawn for this project. DM Sans and 
 
 ## Fan-food catalog images
 
-The 52 `public/images/fan-food/*.webp` files now use frames, game images, or official food imagery associated with the work named in each concept's `reference` field in `src/data/fanConcepts.js`. The Gordon Ramsay Beef Wellington image is from the official Hell's Kitchen menu. These are unofficial academic-demo references. The original works and images belong to their respective rights holders; this project has not established a reuse license for the catalog images. In particular, the Unsplash and Wikimedia licenses previously listed for these 52 file names no longer apply. Source-page records for every image are incomplete; do not present the collection as cleared for commercial use.
+The 52 base images in `public/images/fan-food/` mostly use frames and game images associated with the work named in each concept's `reference` field in `src/data/fanConcepts.js`. Another 68 files ending in `-v1.webp` or `-v2.webp` are closer crops of those same sources for distinct listing variations. The Gordon Ramsay Beef Wellington image is from the official Hell's Kitchen menu. Chaliapin Steak Don uses a real-life recreation. These are unofficial academic-demo references. The original works and images belong to their respective rights holders; this project has not established a reuse license for the catalog images. In particular, the Unsplash and Wikimedia licenses previously listed for these file names no longer apply. Source-page records for every image are incomplete; do not present the collection as cleared for commercial use.
 
 The following download locations were recorded for images added in the final pass. A third-party host may mirror a frame without owning the underlying rights.
 
 | Local file | Recorded image location or page |
 |---|---|
 | `ichiraku-ramen.webp` | [Naruto still on IMDb](https://m.media-amazon.com/images/M/MV5BYTJiMWIwNTItMjM0Ny00MTdhLTk0NzEtZTZiMTg0NDRlODE4XkEyXkFqcGc%40._V1_.jpg) |
-| `krabby-patty.webp` | [SpongeBob episode still](https://thesbcommunity.com/captures/content/episodes/galleries/082a%20-%20The%20Original%20Fry%20Cook/082a%20-%20The%20Original%20Fry%20Cook%20%28245%29.jpg) |
 | `howls-breakfast.webp` | [Howl's Moving Castle frame](https://i.pinimg.com/originals/43/b7/ee/43b7ee7e32b682c62f85761842d20948.jpg) |
 | `luffy-meat.webp` | [One Piece frame](https://miro.medium.com/v2/resize%3Afit%3A1400/0%2ATMvup_Y8r43ryxYl.jpg) |
-| `remys-ratatouille.webp` | [Ratatouille still](https://image.tmdb.org/t/p/w1280/nMYpw5h7TGvluj0krUhANU7no8M.jpg) |
 | `sashas-half-potato.webp` | [Attack on Titan still](https://static.fandomspot.com/images/03/13176/07-sasha-blouse-attack-on-titan-anime.jpg) |
 | `ponyos-ham-ramen.webp` | [Ponyo frame](https://pbs.twimg.com/media/DKSsYsJVoAAw0wp.jpg) |
 | `garfields-lasagna.webp` | [Garfield frame](https://www.thetakeout.com/images/vsjsfbq4tnc5jsjuikyf.jpg) |
 | `skyrim-sweetroll.webp` | [Skyrim game image](https://images.hive.blog/0x0/https%3A/files.peakd.com/file/peakd-hive/jijisaurart/23swe9j2gDQcKxQX77gPSybdQtLDw5LJmJo9kcLmxtsMM7Zbc7DDzGhTFRj8dAYUN7YGP.jpg) |
 | `butterbeer.webp` | [Harry Potter film still](https://www.moviepilot.de/news/wie-harry-potter-fans-butterbier-bestellen-konnen-160393) |
 | `beef-wellington.webp` | [Gordon Ramsay Hell's Kitchen menu](https://www.gordonramsayrestaurants.com/en/us/hells-kitchen/menus) |
+
+### Food-focused replacements
+
+These later replacements make the dish visible in the catalog card. The linked pages host or discuss the stills; they do not grant reuse rights.
+
+| Local file | Recorded image location or page |
+|---|---|
+| `krabby-patty.webp` | [SpongeBob burger still](https://www.mashed.com/1377637/spongebob-foods-wish-existed/) |
+| `doraemons-dorayaki.webp` | [Doraemon dorayaki still](https://yummybazaar.com/blogs/blog/doraemon-and-dorayaki-pancakes) |
+| `remys-ratatouille.webp` | [Ratatouille film still](https://comercomodiosmanda.blogspot.com/2013/03/la-comida-en-el-cine-ratatouille.html) |
+| `cafe-leblanc-coffee.webp` | [Persona 5 coffee brewing still](https://en.softonic.com/articles/the-best-coffee-growers-in-the-games-celebrating-international-coffee-day) |
+| `mr-pings-noodle-soup.webp` | [Kung Fu Panda noodle still](https://www.pinterest.com/pin/guardado-rpido--334814553560415496/) |
+| `bachelor-chow.webp` | [Futurama Bachelor Chow graphic](https://geektyrant.com/news/binging-with-babish-shows-us-how-to-make-bachelor-chow-from-futurama) |
+| `chaliapin-steak-don.webp` | [Food Wars inspired real-life recreation](https://www.punchfork.com/recipe/Chaliapin-Steak-Don-No-Recipes) |
+| `ls-strawberry-shortcake.webp` | [Death Note manga art attributed to Takeshi Obata](https://www.zerochan.net/3034) |
+| `tree-trunks-apple-pie.webp`, `pinkie-pies-cupcakes.webp` | Closer crops of the existing animation frames |
