@@ -1,5 +1,5 @@
 // Unofficial, fan-inspired food ideas. Seller names are fictional demo names.
-// Each concept has its own locally saved photograph and an explicit source credit.
+// Each concept has its own locally stored image and a reference to the source work.
 export const fanConcepts = [
   // Meals: twelve ideas, with eight additional preparations.
   { slug: 'ichiraku-ramen', category: 'Meals', title: 'Ichiraku Ramen', reference: 'Naruto', businessName: 'Hidden Bowl Kitchen', description: 'Straight from the Hidden Leaf. No ninja license required.', price: 2490, variations: [

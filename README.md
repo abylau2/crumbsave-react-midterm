@@ -59,7 +59,7 @@ src/
   pages/                  route-level experiences
   utils/                  catalog and validation functions
   styles/                 tokens, global rules, layout, components, responsive
-public/images/fan-food/   52 locally stored food photographs
+public/images/fan-food/   52 locally stored reference images
 public/fonts/             locally stored DM Sans and Newsreader fonts and OFL licenses
 tests/                    focused unit and browser smoke tests
 ```
@@ -84,7 +84,7 @@ The public demo is deployed to GitHub Pages from the `gh-pages` branch. Run `npm
 
 ## Images and fonts
 
-The 52 concept photos in `public/images/fan-food` are local copies: 50 free Unsplash photos under the [Unsplash License](https://unsplash.com/license), one CC0 dorayaki photograph, and one public-domain potato photograph from Wikimedia Commons. All source pages are recorded in [IMAGE_CREDITS.md](IMAGE_CREDITS.md). The older 16 local photos are retained so archived reservations can still show their snapshots. DM Sans and Newsreader are served locally with their OFL licenses in `public/fonts/`. Food photos illustrate fan-inspired ideas; they do not depict actual offers from the fictional sellers or partnerships with the referenced franchises. Image URLs include a version suffix so returning visitors receive updated photos.
+The 52 concept images in `public/images/fan-food` now depict scenes or food from the referenced films, series, and games. The Beef Wellington image comes from Gordon Ramsay's official Hell's Kitchen site. These images are third-party copyrighted material; their use is not licensed for commercial publication. Known image sources and the attribution limits are documented in [IMAGE_CREDITS.md](IMAGE_CREDITS.md). The older 16 Unsplash photos remain available for archived reservations and for newly created bags. DM Sans and Newsreader are served locally with their OFL licenses in `public/fonts/`. The images do not represent real marketplace offers or official franchise partnerships. Image URLs include a version suffix so returning visitors receive updated assets.
 
 ## Limits
 

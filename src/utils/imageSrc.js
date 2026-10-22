@@ -1,4 +1,4 @@
-// A versioned URL refreshes locally stored photos after an image update.
+// A versioned URL refreshes locally stored images after an asset update.
 export function imageSrc(path) {
-  return `${path}${path.includes('?') ? '&' : '?'}v=5`;
+  return `${path}${path.includes('?') ? '&' : '?'}v=6`;
 }
